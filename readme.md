@@ -6,6 +6,7 @@
 
 Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les données météorologiques à l'aide d'Apache Airflow, Python et Docker. Le pipeline extrait les données de prévisions météorologiques de l'API OpenWeatherMap (https://openweathermap.org/api/forecast30), les transforme dans un format approprié et les charge dans une base de données PostgreSQL. Les données sont ensuite analysées et visualisées à l'aide de Jupyter Notebook (``  extract_task >> transform_task >> load_task  ``).
 
+
 ## Caractéristiques
 
 - **Extraction de données** : récupère les données de prévisions météorologiques à partir de l'API OpenWeatherMap.
@@ -41,7 +42,8 @@ Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les donné
 4. Accédez à l'interface Web Airflow à l'adresse « http://localhost:8080 ».
 
 ## Utilisation
-- Par défaut les données météologiques de la ville de Paris ont été utilisées.
+- Par défaut les données météologiques des villes suivantes ont été utilisées, il s'agit de :
+    'Paris', 'Londres', 'Berlin', 'Tokyo'
 - J'ai configuré le DAG pour qu'il s'exécute toutes les 3 heures parceque l'API OpenWeatherMap fournit des prévisions météorologiques sur 5 jours avec un pas de 3 heures. [voir doc](https://openweathermap.org/api/forecast30)
 - La clé API est laissé publique parcequ'il est gratuit.
 

@@ -13,9 +13,9 @@ default_args = {
     'owner': 'airflow',  # Le propriétaire du DAG
     'depends_on_past': False,  # Ne dépend pas des exécutions passées
     'start_date': pendulum.today('UTC').add(days=-1),  # Commence à "hier" pour s'assurer que le DAG s'exécute dès son lancement
-    'email_on_failure': False,  # Pas d'alerte email en cas d'échec
-    'email_on_retry': False,  # Pas d'alerte email en cas de retry
-    'retries': 1,  # Nombre de tentatives en cas d'échec
+    'email_on_failure': False,  
+    'email_on_retry': False,   
+    'retries': 2,  # Nombre de tentatives en cas d'échec
     'retry_delay': timedelta(minutes=5),  # Intervalle entre chaque retry
 }
 
