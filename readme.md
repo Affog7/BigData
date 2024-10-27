@@ -43,7 +43,7 @@ Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les donné
 ## Utilisation
 - Par défaut les données météologiques de la ville de Paris ont été utilisées.
 - J'ai configuré le DAG pour qu'il s'exécute toutes les 3 heures parceque l'API OpenWeatherMap fournit des prévisions météorologiques sur 5 jours avec un pas de 3 heures. [voir doc](https://openweathermap.org/api/forecast30)
-  
+- La clé API est laissé publique parcequ'il est gratuit.
 
 
 1. **Activez le DAG** :
@@ -66,6 +66,12 @@ Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les donné
         --email augustin@admin.com \  
         --password admin  
     ```
+ - Assurez vous d'avoir renseigner la clé API dans le fichier .env à la racine du projet
+
+   <b>Info </b>: Cette commande vous permet de définir une variable 'weather_api_key' Airflow sans passer par l'interface web.
+        ```
+        airflow variables set weather_api_key ${OPENWEATHERMAP_API_KEY}" 
+        ```
  - Capture WebUI
  ![Dashbord Dags](image.png)
 

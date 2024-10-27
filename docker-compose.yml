@@ -17,14 +17,17 @@ services:
       AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      OPENWEATHERMAP_API_KEY: "${OPENWEATHERMAP_API_KEY}"  # Ajout de la clé API comme variable d'environnement
     command: >
-      bash -c " airflow db init && airflow users create \
+      bash -c "airflow db init && airflow users create \
       --username admin \
       --firstname Admin \
       --lastname Augustin \
       --role Admin \
       --email augustin@admin.com \
-      --password admin"
+      --password admin 
+      && airflow variables set weather_api_key ${OPENWEATHERMAP_API_KEY}" 
+
     depends_on:
       - postgres
     restart: on-failure
