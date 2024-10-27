@@ -28,9 +28,9 @@ Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les donné
  cd météo-etl-pipeline
  ```
 
-2. Créez un fichier `.env` dans le répertoire racine avec votre clé API OpenWeatherMap :
+2. Créez un fichier `.env` ou remplacez `.env copy` par `.enc` dans le répertoire racine avec votre clé API OpenWeatherMap :
  ```environ.
- OPENWEATHERMAP_API_KEY=votre_api_key_here
+ OPENWEATHERMAP_API_KEY=votre_api_key_ici
  ```
 
 3. Créez et démarrez les conteneurs Docker :
