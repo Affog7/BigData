@@ -134,3 +134,6 @@ Le fichier `docker-compose.yml` définit les services requis pour le pipeline ET
 ## Documentation API
 
 Pour plus d'informations sur l'API OpenWeatherMap, veuillez vous référer à la [documentation officielle](https://openweathermap.org/api/forecast30).
+
+## Réaliser par :
+  [Augustin Affognon](https://github.com/affog7)
