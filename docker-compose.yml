@@ -21,9 +21,9 @@ services:
       bash -c " airflow db init && airflow users create \
       --username admin \
       --firstname Admin \
-      --lastname User \
+      --lastname Augustin \
       --role Admin \
-      --email admin@example.com \
+      --email augustin@admin.com \
       --password admin"
     depends_on:
       - postgres

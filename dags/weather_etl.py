@@ -19,8 +19,8 @@ default_args = {
 dag = DAG(
     'weather_etl',
     default_args=default_args,
-    description='A simple ETL pipeline for weather data',
-    schedule_interval=timedelta(hours=3),  # J'aexécute toutes les 3 heures en tenant compte des infos de mise de 3 h de l'api 
+    description='ETL pipeline pour données météo',
+    schedule_interval=timedelta(hours=3),  # J'exécute toutes les 3 heures en tenant compte des infos de mise de 3 h de l'api 
                                            # https://openweathermap.org/api
 )
 

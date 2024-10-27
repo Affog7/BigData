@@ -1,12 +1,10 @@
-Pour planifier le planificateur basé sur l'API OpenWeatherMap qui fournit des prévisions météorologiques sur 5 jours avec un pas de 3 heures, vous devez configurer votre DAG pour qu'il s'exécute à des intervalles appropriés. Étant donné que les prévisions sont mises à jour toutes les 3 heures, vous pouvez configurer le DAG pour qu'il s'exécute toutes les 3 heures.
 
- https://openweathermap.org/api
-
+ 
  # Pipeline ETL météo avec Apache Airflow
 
 ## Aperçu
 
-Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les données météorologiques à l'aide d'Apache Airflow, Python et Docker. Le pipeline extrait les données de prévisions météorologiques de l'API OpenWeatherMap, les transforme dans un format approprié et les charge dans une base de données PostgreSQL. Les données sont ensuite analysées et visualisées à l'aide de Jupyter Notebook.
+Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les données météorologiques à l'aide d'Apache Airflow, Python et Docker. Le pipeline extrait les données de prévisions météorologiques de l'API OpenWeatherMap (https://openweathermap.org/api/forecast30), les transforme dans un format approprié et les charge dans une base de données PostgreSQL. Les données sont ensuite analysées et visualisées à l'aide de Jupyter Notebook (``  extract_task >> transform_task >> load_task  ``).
 
 ## Caractéristiques
 
@@ -43,6 +41,10 @@ Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les donné
 4. Accédez à l'interface Web Airflow à l'adresse « http://localhost:8080 ».
 
 ## Utilisation
+- Par défaut les données météologiques de la ville de Paris ont été utilisées.
+- J'ai configuré le DAG pour qu'il s'exécute toutes les 3 heures parceque l'API OpenWeatherMap fournit des prévisions météorologiques sur 5 jours avec un pas de 3 heures. [voir doc](https://openweathermap.org/api/forecast30)
+  
+
 
 1. **Activez le DAG** :
  - Accédez à l'interface Web Airflow.
@@ -50,21 +52,35 @@ Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les donné
  - Déclenchez le DAG manuellement pour démarrer le processus ETL.
 
 2. **Analyser les données** :
- - Ouvrez un bloc-notes Jupyter.
+ - Ouvrez un notebook/main.ipynb Jupyter.
  - Connectez-vous à la base de données PostgreSQL en utilisant les informations d'identification fournies.
  - Utilisez l'exemple de bloc-notes pour interroger les données et créer des visualisations.
+
+ - Données de connexion `` admin/admin ``
+    ```
+    airflow db init && airflow users create \  
+        --username admin \  
+        --firstname Admin \  
+        --lastname Augustin \  
+        --role Admin \  
+        --email augustin@admin.com \  
+        --password admin  
+    ```
+ - Capture WebUI
+ ![Dashbord Dags](image.png)
 
 ## Structure du répertoire
 
 ```
-météo-etl-pipeline/
-├── jours/
-│ └── météo_etl.py
+/
+├── dags/
+│ └── weather_etl.py
 ├── docker-compose.yml
 ├── .env
-├── LISEZMOI.md
-└── cahiers/
- └── météo_analyse.ipynb
+├── readme.md
+├── requirements.txt
+└── notebook/
+ └── main.ipynb
 ```
 
 ## Détails du DAG
@@ -83,11 +99,11 @@ Le DAG `weather_etl.py` se compose de trois tâches principales :
 
 3. **Charger les données** :
  - Insère les données transformées dans une base de données PostgreSQL à l'aide de SQLAlchemy.
- - Remplace les données existantes dans la table « météo ».
+ - Remplace les données existantes dans la table « weather ».
 
 ## Analyse des données
 
-Le notebook `weather_analysis.ipynb` fournit des exemples sur la façon d'interroger les données de la base de données PostgreSQL et de créer des visualisations à l'aide de Matplotlib et Seaborn. Le cahier comprend :
+Le notebook `main.ipynb` fournit des exemples sur la façon d'interroger les données de la base de données PostgreSQL et de créer des visualisations à l'aide de Matplotlib et Seaborn. ça comprend :
 
 - Tracé linéaire de la température au fil du temps.
 - Graphique à barres de l'humidité au fil du temps.
@@ -98,24 +114,14 @@ Le notebook `weather_analysis.ipynb` fournit des exemples sur la façon d'interr
 
 Le fichier `docker-compose.yml` définit les services requis pour le pipeline ETL :
 
-- **PostgreSQL** : le service de base de données.
+- **PostgreSQL** : le service de sytème de gestion de base de données.
 - **Airflow Init** : initialise la base de données Airflow et crée un utilisateur.
 - **Serveur Web Airflow** : l'interface Web Airflow.
 - **Airflow Scheduler** : le service de planification Airflow.
 
-Chaque service dispose d'une politique de redémarrage pour gérer les échecs avec élégance.
+    NB: Chaque service se redémarre en cas d'échec.
+ 
 
-## Contribuer
-
-Les contributions sont les bienvenues ! Veuillez ouvrir un problème ou soumettre une pull request si vous avez des suggestions ou des améliorations.
-
-## Licence
-
-Ce projet est sous licence MIT. Consultez le fichier [LICENSE](LICENSE) pour plus de détails.
-
-## Contact
-
-Pour toute question ou assistance, veuillez contacter [votre-email@example.com](mailto:your-email@example.com).
 
 ## Documentation API
 
