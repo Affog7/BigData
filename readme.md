@@ -34,12 +34,17 @@ Ce projet implémente un pipeline ETL (Extract, Transform, Load) pour les donné
  OPENWEATHERMAP_API_KEY=votre_api_key_ici
  ```
 
-3. Créez et démarrez les conteneurs Docker :
+3. Installation des dépendances : Pour installer les dépendances listées dans le fichier `requirements.txt`, exécutez la commande suivante dans votre terminal :
+
+   ```bash
+   pip install -r requirements.txt
+
+4. Créez et démarrez les conteneurs Docker :
  ```bash
  docker-compose up --build
  ```
 
-4. Accédez à l'interface Web Airflow à l'adresse « http://localhost:8080 ».
+5. Accédez à l'interface Web Airflow à l'adresse « http://localhost:8080 ».
 
 ## Utilisation
 - Par défaut les données météologiques des villes suivantes ont été utilisées, il s'agit de :
